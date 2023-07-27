@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../../services/countries.service';
 import { ICountry } from '../../interfaces/country.interface';
 
@@ -8,19 +8,27 @@ import { ICountry } from '../../interfaces/country.interface';
   styles: [
   ]
 })
-export class ByCapitalPageComponent {
+export class ByCapitalPageComponent implements OnInit{
 
   public countries: ICountry[] = [];
+  public initialSearchTxt: string = '';
+  public isLoading = false;
 
   constructor(private countriesService: CountryService){
 
   }
 
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheStore.byCapital.countries;
+    this.initialSearchTxt = this.countriesService.cacheStore.byCapital.search;
+  }
+
   searchByCapital(capital: string): void{
+    this.isLoading = true;
     this.countriesService.searchCapital(capital)
       .subscribe(countries => {
         this.countries = countries;
-        console.log(countries)
+        this.isLoading = false;
       });
   }
 }
