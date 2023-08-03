@@ -12,17 +12,11 @@ export class SearchBoxComponent implements OnInit, OnDestroy{
   private deBouncer: Subject<string> = new Subject<string>();
   private deBouncerSuscription?: Subscription;
 
-  @ViewChild('txtSearch') 
-  public tagInput!: ElementRef<HTMLInputElement>;
-
   @Input()
   public placeholder: string = '';
 
   @Input()
   public initialSearchTxt: string = '';
-
-  @Output()
-  public onText: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
   public onDebounce: EventEmitter<string> = new EventEmitter<string>();
@@ -39,10 +33,6 @@ export class SearchBoxComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.deBouncerSuscription?.unsubscribe()
-  }
-  
-  emitTxt(): void{
-    this.onText.emit(this.tagInput.nativeElement.value)
   }
 
   onSearchType(text: string): void{

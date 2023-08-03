@@ -21,14 +21,21 @@
             <h3>Information</h3>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <strong>Population:</strong> {{country.population | number}}
+                    <strong>Official Name:</strong> {{country.name.official}}
                 </li>
                 <li class="list-group-item">
-                    <strong>Population:</strong> {{country.cca3 }}
+                    <strong>Population:</strong> {{country.population | number}} people
+                </li>
+                <li class="list-group-item">
+                    <strong>Code:</strong> {{country.cca3 }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Independent Country:</strong> {{country.independent ? 'Yes': 'No' }}
                 </li>
             </ul>
         </div>
     </div>
+    <hr>
 
     <div class="row m-t2">
         <div class="col">
@@ -48,6 +55,20 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <p><strong>{{country.name.common}} is located on {{country.region}} continent in the region of {{country.subregion}}<br>
+            Its capital is {{country.capital}} and it has a total area of {{country.area | number}} Km².<br><br>
+            {{country.flags.alt}}
+        </strong></p>
+    </div>
+
+    <div class="row mt-2 mb-5">
+        <div class="col-6 justify-content-center">
+            <img [src]="country.coatOfArms.png" style="width: 40rem; height: 40rem;">
+        </div>
+    </div>
+    <hr>
 </div>
 
 
